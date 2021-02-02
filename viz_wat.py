@@ -91,7 +91,7 @@ def visualize_attention(args: Namespace):
 if __name__ == '__main__':
 
     parser = ArgumentParser()
-    parser.add_argument('--data_path', type=str, default='data_RE2/tmp/0_testcc',
+    parser.add_argument('--data_path', type=str, default='vant_data/test',
                         help='Path to data CSV file')
     parser.add_argument('--viz_dir', type=str, default='viz_attention',
                         help='Path where attention PNGs will be saved')

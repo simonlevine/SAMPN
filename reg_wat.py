@@ -26,7 +26,7 @@ if __name__ == '__main__':
     args.sumstyle=True
     args.seed=3032
     args.gpuUSE=True
-    args.gpu=1
+    args.gpu=0
 
     # args.data_path,args.cols_to_read ='data_RE2/water_solubilityOCD.csv',[x for x in range(2)]
     args.data_path,args.cols_to_read ='vant_data/train/train.csv',[x for x in range(2)]

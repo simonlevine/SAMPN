@@ -58,7 +58,7 @@ def visualize_attention(args: Namespace):
     metric_func = get_metric_func(metric=args.metric)
     
     out = [float(model(x['sm']).cpu().detach().numpy().squeeze()) for x in viz_dataloader]
-    submission_df = pd.read_csv('test/raw/60170fffa2720fa4d0b9067a_holdout_set.csv')
+    submission_df = pd.read_csv('./vant_data/test/holdout_set.csv')
     submission_df['predicted']=out
     submission_df.to_csv('./annot_holdout_set.csv',index=False,)
     print(submission_df)

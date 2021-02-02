@@ -56,9 +56,12 @@ def visualize_attention(args: Namespace):
                              drop_last=False,
                              worker_init_fn=worker_init_fn)
     metric_func = get_metric_func(metric=args.metric)
-
-    out = [model(x['sm']).detach().cpu().numpy()[0][0] for x in viz_dataloader]
-    print(out)
+    
+    out = [float(model(x['sm']).cpu().detach().numpy().squeeze()) for x in viz_dataloader]
+    submission_df = pd.read_csv('test/raw/60170fffa2720fa4d0b9067a_holdout_set.csv')
+    submission_df['predicted']=out
+    submission_df.to_csv('./annot_holdout_set.csv',index=False,)
+    print(submission_df)
     breakpoint()
 
     for it, result_batch in enumerate(tqdm(viz_dataloader)):

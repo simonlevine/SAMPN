@@ -11,6 +11,8 @@ from cv import evaluate_batch
 from utils import get_task_names, get_metric_func
 from scaler import StandardScaler, minmaxScaler
 
+import pandas as pd
+
 seed=3032
 def seed_torch(seed=seed):
     random.seed(seed)
@@ -48,15 +50,16 @@ def visualize_attention(args: Namespace):
         print(f'Loading data -->{DGLtest}')
 
     viz_data=DGLDataset(DGLtest,training=False)
-    viz_dataloader = DataLoader(viz_data, batch_size=args.batch_size,
+    viz_dataloader = DataLoader(viz_data, batch_size= 1, #args.batch_size,
                              shuffle=False, num_workers=0,
                              collate_fn=DGLCollator(training=False),
                              drop_last=False,
                              worker_init_fn=worker_init_fn)
     metric_func = get_metric_func(metric=args.metric)
 
-    for it, result_batch in enumerate(tqdm(viz_dataloader)):
+    out = []
 
+    for it, result_batch in enumerate(tqdm(viz_dataloader)):
 
         batch_sm = result_batch['sm']
         label_batch=result_batch['labels']
@@ -86,7 +89,11 @@ def visualize_attention(args: Namespace):
                             logger=None,
                             Foldth=0,
                             predsLog=args.save_dir)
+
+        out.append(test_preds)
         print(f'rung viz{args.viz_dir}')
+
+    pd.DataFrame(test_preds).to_csv('./test_out.csv')
 
 
 if __name__ == '__main__':

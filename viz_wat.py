@@ -57,7 +57,7 @@ def visualize_attention(args: Namespace):
                              worker_init_fn=worker_init_fn)
     metric_func = get_metric_func(metric=args.metric)
 
-    out = [int(model(x['sm']).detach().cpu().numpy()) for x in viz_dataloader]
+    out = [model(x['sm']).detach().cpu().numpy()[0][0] for x in viz_dataloader]
     print(out)
     breakpoint()
 

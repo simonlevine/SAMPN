@@ -110,7 +110,7 @@ if __name__ == '__main__':
 
 
 
-    args.data_path='data_RE2/ol_wat.csv'
+    args.data_path='vant_data/test/holdout_set.csv'
     args.data_filename=os.path.basename(args.data_path)+f'_seed{args.seed}'
 
 
@@ -118,7 +118,7 @@ if __name__ == '__main__':
     args.cuda = not args.no_cuda and torch.cuda.is_available()
 
 
-    args.checkpoint_path='save_test/fold_0/model_0/water_solubilityOCD.csv_seed3032_model.pt'
+    args.checkpoint_path='save_test/fold_0/model_0/train.csv_seed3032_model.pt'
     args.batch_size=128
     args.attention=True
     args.dataset_type='regression'

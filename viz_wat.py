@@ -43,7 +43,8 @@ def visualize_attention(args: Namespace):
         print(f'Loading data -->{DGLtest}')
     else:
         direct = 'data_RE2/tmp/'
-        DGLtest=direct+'viz.csv'
+        # DGLtest=direct+'viz.csv'
+        DGLtest = 'vant_data/test/holdout_set.csv'
         print(f'Loading data -->{DGLtest}')
 
     viz_data=DGLDataset(DGLtest,training=False)

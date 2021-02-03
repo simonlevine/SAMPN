@@ -13,7 +13,7 @@ source activate torch
 if __name__ == '__main__':
     args = parse_train_args()
 
-    args.num_folds=5
+    args.num_folds=1
     args.epochs=100
     args.ensemble_size=1
     args.batch_size=128

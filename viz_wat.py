@@ -62,7 +62,7 @@ def visualize_attention(args: Namespace):
     submission_df['predicted']=out
     submission_df.to_csv('./submission/annot_holdout_set.csv',index=False,)
     print(submission_df)
-    breakpoint()
+    # breakpoint()
 
     for it, result_batch in enumerate(tqdm(viz_dataloader)):
 
@@ -137,7 +137,7 @@ if __name__ == '__main__':
     args.dataset_type='regression'
     args.scale="normalization"
     args.num_tasks=1
-    args.metric='rmse'
+    args.metric='mae'
     args.save_dir='save_test'
     del args.no_cuda
 

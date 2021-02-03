@@ -131,7 +131,7 @@ if __name__ == '__main__':
     args.cuda = not args.no_cuda and torch.cuda.is_available()
 
 
-    args.checkpoint_path='save_test/fold_0/model_0/train.csv_seed3032_model.pt'
+    args.checkpoint_path='save_test/fold_0/model_0/train_augmented.csv_seed3032_model.pt'
     args.batch_size=128
     args.attention=True
     args.dataset_type='regression'

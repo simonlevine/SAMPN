@@ -64,41 +64,40 @@ def visualize_attention(args: Namespace):
     print(submission_df)
     # breakpoint()
 
-    for it, result_batch in enumerate(tqdm(viz_dataloader)):
+    # for it, result_batch in enumerate(tqdm(viz_dataloader)):
 
-        batch_sm = result_batch['sm']
-        label_batch=result_batch['labels']
-        if args.dataset_type == 'regression':
-            if args.scale=="standardization":
-                print('Fitting scaler(Z-score standardization)')
-                scaler = StandardScaler().fit(label_batch)
-                y_train_scaled = scaler.transform(label_batch)
-                print(f'train data mean:{scaler.means}\nstd:{scaler.stds}\n')
-            if args.scale=="normalization":
-                print('Fitting scaler( Min-Max normalization )')
-                scaler = minmaxScaler().fit(label_batch)
-                y_train_scaled = scaler.transform(label_batch)
-                print(f'train data min:{scaler.mins}\ntrain data max:{scaler.maxs}\n')
-            if args.scale !='standardization' and args.scale!='normalization':
-                raise ValueError("not implemented scaler,use one of [standardization, normalization]")
-        else:
-            scaler = None
-        mpn.viz_attention(batch_sm, viz_dir=args.viz_dir)
-        test_targets,test_preds,test_scores = evaluate_batch(args,
-                            model=model,
-                            data=viz_dataloader,
-                            num_tasks=args.num_tasks,
-                            metric_func=metric_func,
-                            dataset_type=args.dataset_type,
-                            scaler=scaler,
-                            logger=None,
-                            Foldth=0,
-                            predsLog=args.save_dir)
+    #     batch_sm = result_batch['sm']
+    #     label_batch=result_batch['labels']
+    #     if args.dataset_type == 'regression':
+    #         if args.scale=="standardization":
+    #             print('Fitting scaler(Z-score standardization)')
+    #             scaler = StandardScaler().fit(label_batch)
+    #             y_train_scaled = scaler.transform(label_batch)
+    #             print(f'train data mean:{scaler.means}\nstd:{scaler.stds}\n')
+    #         if args.scale=="normalization":
+    #             print('Fitting scaler( Min-Max normalization )')
+    #             scaler = minmaxScaler().fit(label_batch)
+    #             y_train_scaled = scaler.transform(label_batch)
+    #             print(f'train data min:{scaler.mins}\ntrain data max:{scaler.maxs}\n')
+    #         if args.scale !='standardization' and args.scale!='normalization':
+    #             raise ValueError("not implemented scaler,use one of [standardization, normalization]")
+    #     else:
+    #         scaler = None
+    #     mpn.viz_attention(batch_sm, viz_dir=args.viz_dir)
+    #     test_targets,test_preds,test_scores = evaluate_batch(args,
+    #                         model=model,
+    #                         data=viz_dataloader,
+    #                         num_tasks=args.num_tasks,
+    #                         metric_func=metric_func,
+    #                         dataset_type=args.dataset_type,
+    #                         scaler=scaler,
+    #                         logger=None,
+    #                         Foldth=0,
+    #                         predsLog=args.save_dir)
 
-        out.append(test_preds)
-        print(f'rung viz{args.viz_dir}')
+    #     out.append(test_preds)
+    #     print(f'rung viz{args.viz_dir}')
 
-    pd.DataFrame(test_preds).to_csv('./test_out.csv')
 
 
 if __name__ == '__main__':
